@@ -9,7 +9,17 @@
 	<head><title id="Main title">TicTacToe</title></head>
 	<body background="image/background2.jpg">
 		<h1 style="color:blue; font-family:verdana; font-size:300%;" align="center">TicTacToe</h1>
-		<table border="5"  align="center"><FONT FACE="arial" SIZE="100" COLOR=red>
+		<table id="tablaDePos" border="2"  align="center">
+			<tr>
+				<td>X</td>
+				<td>O</td>
+			</tr>
+			<tr>
+				<td id="puntosX">0</td>
+				<td Id="puntosO">0</td>
+			</tr>
+		</table>
+		<FONT FACE="arial" SIZE="100" COLOR=red><table border="8"  align="center">
 			<tr>
 				<td id="1" onclick="putPiece('1')" onload="updateBoard()"> -- </td>
 				<td id="2" onclick="putPiece('2')" onload="updateBoard()"> -- </td>

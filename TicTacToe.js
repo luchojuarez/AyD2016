@@ -1,37 +1,57 @@
-const emptyBoard =
-	["--","--","--",
-	 "--","--","--",
-	 "--","--","--"];
-
-var board = emptyBoard;
+function emptyBoard() {return ["--","--","--",
+	 						   "--","--","--",
+	 						   "--","--","--"];
+}
+var board = emptyBoard();
 var currentPlayer = "O"
 
+var nameP1 = "";
+var puntosP1 = 0;
+var nameP2 = "";
+var puntosP2 = 0;
+
+function logeo (){
+	nameP1 = prompt("Cual es su nombre?","");
+	console.log(nameP1);
+}
+
+function redireccionar(){
+	location.href="TicTacToe.html"
+}
 
 function putPiece (pos) {
 	var posInt = charToInt(pos)-1;
-	if (Boolean(board[posInt]=="--")){ // si el lugar esta vacio
-		board[posInt] = currentPlayer; //actualizo en el tablero
-		document.getElementById(pos).innerHTML = currentPlayer;
-		if (Boolean(gameIsDone())){
-			document.getElementById("boton").innerHTML = "Reiniciar";
-			window.alert("el jugador "+currentPlayer+" gano!");
-		}else{
-			if (Boolean(currentPlayer=="O") ){
-				currentPlayer="X";
+	if (!Boolean(gameIsDone())){
+		if (Boolean(board[posInt]=="--")){ // si el lugar esta vacio
+			board[posInt] = currentPlayer; //actualizo en el tablero
+			document.getElementById(pos).innerHTML = currentPlayer;
+			if (Boolean(gameIsDone())){
+				winner();
 			}else{
-				currentPlayer="O";
+				if (Boolean(currentPlayer=="O") ){
+					currentPlayer="X";
+				}else{
+					currentPlayer="O";
+				}
+				document.getElementById("boton").innerHTML = "Es el turno de : "+currentPlayer;
 			}
-			document.getElementById("boton").innerHTML = "Es el turno de : "+currentPlayer;
+		}
+		else {
+			window.alert("LUGAR OCUPADO")
 		}
 	}
-	else {
-		window.alert("LUGAR OCUPADO")
-	}
+}
+function winner() {
+	document.getElementById("boton").innerHTML = "Reiniciar";
+	window.alert("el jugador "+currentPlayer+" gano!");
+	document.body.style.background = "url('image/winner.png')";
+	document.getElementById("puntos"+currentPlayer).innerHTML = parseInt(document.getElementById("puntos"+currentPlayer).innerHTML)+1;
 }
 
 function restart() {
-	board = ["--","--","--", "--","--","--","--","--","--"];;
+	board = emptyBoard();
 	updateBoard();
+	document.body.style.background = "url('image/background2.jpg')";
 	document.getElementById("boton").innerHTML = "Es el turno de : "+currentPlayer;
 }
 
@@ -104,33 +124,3 @@ function charToInt(a) {
 	}
 	return value;
 }
-//
-// switch (pos) {
-// 	case "1":
-// 		board[0]=currentPlayer;
-// 		break;
-// 	case "2":
-// 		board[1]=currentPlayer;
-// 		break;
-// 	case "3":
-// 		board[2]=currentPlayer;
-// 		break;
-// 	case "4":
-// 		board[3]=currentPlayer;
-// 		break;
-// 	case "5":
-// 		board[4]=currentPlayer;
-// 		break;
-// 	case "6":
-// 		board[5]=currentPlayer;
-// 		break;
-// 	case "7":
-// 		board[6]=currentPlayer;
-// 		break;
-// 	case "8":
-// 		board[7]=currentPlayer;
-// 		break;
-// 	case "9":
-// 		board[8]=currentPlayer;
-// 		break;
-// }
